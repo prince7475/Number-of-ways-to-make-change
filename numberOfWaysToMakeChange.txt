@@ -1,0 +1,94 @@
+Given an array of integers as coin denominations and a single integer 
+as a target amount of money, implement a function that returns the number 
+of ways to make a change for that 
+target amount using the given coins. 
+
+function numberOfWaysToMakeChange(n, denoms){
+  let ways = []
+  for(let i = 0; i <= n; i++){
+    ways[i] = 0
+  }
+  ways[0] = 1
+  for(let i = 0; i < denoms.length; i++){
+  let coin = denoms[i]
+    for(let amount = 0; amount <= n; amount++){
+       if(coin <= amount){
+        let remainder = amount - coin
+        if(ways[remainder] > 0){
+          ways[amount] += 1
+         }
+       }
+    }
+  }
+  return ways[n]
+}
+
+
+Time --> O(n * d)
+space --> (n)
+- create ways = [0,0...0] // same size n (inclusive)
+ways[0] = 1
+for(let i = 0; i < denoms.length; i++){
+  let coin = denoms[i]
+  for(let amount = 0; amount <= n; amount++){
+    if(coin <= amount){
+      let remainder = amount - coin
+      if(ways[remainder] > 0){
+        ways[amount] +=  ways[remainder]
+      }
+    }
+  }
+  return ways[n]
+}
+
+
+
+
+
+function numberOfWaysToMakeChange(n,denoms){
+  let ways = []
+  for(let i = 0; i <= n; i++){
+    ways[i] = 0
+  }
+  
+  ways[0] = 1
+  for(let i = 0; i < denoms.length; i++){
+    let coin = denoms[i]
+    for(let amount = 0; amount <= n; amount++){
+      if(coin <= amount){
+        let remainder = amount - coin
+        if(ways[remainder] > 0){
+          ways[amount] += ways[remainder]
+        }
+      }
+    }
+  }
+  return ways[n]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
